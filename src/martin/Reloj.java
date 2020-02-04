@@ -69,7 +69,7 @@ public class Reloj extends Label {
         this.formatoHoras = formatoHoras;
     }
 
-    public void iniciar(){
+    public void iniciar(){//esto sobra ahora mismo
 
         Thread reloj = new Thread(){
             public void run(){
