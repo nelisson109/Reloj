@@ -5,8 +5,7 @@
 *.log
 
 # IDEA
-.idea
-out
+
 
 # BlueJ files
 *.ctxt
