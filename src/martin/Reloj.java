@@ -31,7 +31,7 @@ public class Reloj extends Label {
                     @Override
                     public void run() {
                         if(formatoHoras == true){
-                            DateFormat formato = new SimpleDateFormat("HH:mm:ss");
+                            DateFormat formato = new SimpleDateFormat("HH:mm:ss");//falta pasar el formato
                             Calendar calendar = Calendar.getInstance();
                             horas = calendar.get(Calendar.HOUR);
                             minutos = calendar.get(Calendar.MINUTE);
