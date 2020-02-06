@@ -6,89 +6,112 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.Label;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class Reloj extends Label {
-    private Label relojDigital;
+
     private int horas;
     private int minutos;
     private int segundos;
-    private boolean formatoHoras = true;
+    //private boolean formatoHoras = true;
     private BooleanProperty formatoHs = new SimpleBooleanProperty(true);
+    ArrayList<Tarea> listaTareas = new ArrayList<Tarea>();
+    ArrayList<Accion> listaAcciones = new ArrayList<Accion>();
 
     public Reloj() {
        // iniciar();
     }
 
     public void comenzar(){
-        Timer clock = new Timer();
-        clock.schedule(new TimerTask() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        if(formatoHoras == true){
-                            DateFormat formato = new SimpleDateFormat("HH:mm:ss");//falta pasar el formato
-                            Calendar calendar = Calendar.getInstance();
-                            horas = calendar.get(Calendar.HOUR);
-                            minutos = calendar.get(Calendar.MINUTE);
-                            segundos = calendar.get(Calendar.SECOND);
-                            relojDigital = new Label();
-                            //System.out.println(formato.format(horas) + ":" + formato.format(minutos) + ":" + formato.format(segundos));
-                            //relojDigital.setText(formato.format(horas) + ":" + formato.format(minutos) + ":" + formato.format(segundos));
-                            //relojDigital.setText(horas + ":" + minutos + ":" + segundos);
+                        DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");//falta pasar el formato
+                        Calendar calendar = Calendar.getInstance();
+                        horas = calendar.get(Calendar.HOUR_OF_DAY);
+                        minutos = calendar.get(Calendar.MINUTE);
+                        segundos = calendar.get(Calendar.SECOND);
+                        Date date = new Date();
+                        String fecha = formato.format(date);
+                        if(formatoHs.get() == true){
                             System.out.println(horas + ":" + minutos + ":" + segundos);
                         }
                         else{
-
+                            horas = calendar.get(Calendar.HOUR_OF_DAY);
+                            System.out.println(horas + ":" + minutos + ":" + segundos);
                         }
 
+                        if (listaTareas != null){
+                            for (int i=0; i<listaTareas.size(); i++){
+                                if(listaTareas.get(i).getFecha().equals(fecha) &&
+                                listaTareas.get(i).getHoras()==horas && listaTareas.get(i).getMinutos()==minutos &&
+                                listaTareas.get(i).getSegundos()==segundos){
+                                    for (int j=0; j<listaAcciones.size(); j++){
+                                        listaAcciones.get(j).ejecuta(listaTareas.get(i));
+                                    }
+                                }
+                            }
+                        }
                     }
                 });
             }
         }, 1000, 1000);
-
-      /*  Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            LocalTime currentTime = LocalTime.now();
-            time.setText(currentTime.getHour() + ":" + currentTime.getMinute() + ":" + currentTime.getSecond());
-        }),
-                new KeyFrame(Duration.seconds(1))
-        );
-        clock.setCycleCount(Animation.INDEFINITE);
-        clock.play();*/
     }
 
-    public boolean isFormatoHoras() {
-        return formatoHoras;
+    public void registrarTarea(Tarea tarea){
+        listaTareas.add(tarea);
+        //alarma?
     }
 
-    public void setFormatoHoras(boolean formatoHoras) {
-        this.formatoHoras = formatoHoras;
+    public void borrarTarea(Tarea tarea){
+        listaTareas.remove(tarea);
     }
 
-    public void iniciar(){//esto sobra ahora mismo
+    public void añadirAccion(Accion accion){
+        listaAcciones.add(accion);
+    }
 
-        Thread reloj = new Thread(){
-            public void run(){
-                while(true) {
-                    DateFormat formato = new SimpleDateFormat("HH:mm:ss");
-                    Calendar calendar = Calendar.getInstance();
-                    horas = calendar.get(Calendar.HOUR);
-                    minutos = calendar.get(Calendar.MINUTE);
-                    segundos = calendar.get(Calendar.SECOND);
-                    System.out.println(horas + ":" + minutos + ":" + segundos);
+    public void borrarAccion(Accion accion){
+        listaAcciones.remove(accion);
+    }
 
-                    try{
-                        sleep(1000);
-                    }catch(InterruptedException e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        reloj.start();
+    public boolean isFormatoHs() {
+        return formatoHs.get();
+    }
+
+    public BooleanProperty formatoHsProperty() {
+        return formatoHs;
+    }
+
+    public void setFormatoHs(boolean formatoHs) {
+        this.formatoHs.set(formatoHs);
+    }
+
+    public int getHoras() {
+        return horas;
+    }
+
+    public void setHoras(int horas) {
+        this.horas = horas;
+    }
+
+    public int getMinutos() {
+        return minutos;
+    }
+
+    public void setMinutos(int minutos) {
+        this.minutos = minutos;
+    }
+
+    public int getSegundos() {
+        return segundos;
+    }
+
+    public void setSegundos(int segundos) {
+        this.segundos = segundos;
     }
 }
