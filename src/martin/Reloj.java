@@ -38,11 +38,13 @@ public class Reloj extends Label {
                         Date date = new Date();
                         String fecha = formato.format(date);
                         if(formatoHs.get() == true){
-                            System.out.println(horas + ":" + minutos + ":" + segundos);
+                            //System.out.println(horas + ":" + minutos + ":" + segundos);
+                            setText(horas + ":" + minutos + ":" + segundos);
                         }
                         else{
                             horas = calendar.get(Calendar.HOUR_OF_DAY);
-                            System.out.println(horas + ":" + minutos + ":" + segundos);
+                            //System.out.println(horas + ":" + minutos + ":" + segundos);
+                            setText(horas + ":" + minutos + ":" + segundos);
                         }
 
                         if (listaTareas != null){
