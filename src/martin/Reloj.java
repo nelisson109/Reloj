@@ -16,7 +16,8 @@ public class Reloj extends Label {
     //private boolean formatoHoras = true;
     private BooleanProperty formatoHs = new SimpleBooleanProperty(true);
     ArrayList<Tarea> listaTareas = new ArrayList<Tarea>();
-    ArrayList<Accion> listaAcciones = new ArrayList<Accion>();
+    //ArrayList<Accion> listaAcciones = new ArrayList<Accion>();
+    private Accion accion;
 
     public Reloj() {
        // iniciar();
@@ -42,7 +43,7 @@ public class Reloj extends Label {
                             setText(horas + ":" + minutos + ":" + segundos);
                         }
                         else{
-                            horas = calendar.get(Calendar.HOUR_OF_DAY);
+                            horas = calendar.get(Calendar.HOUR);
                             //System.out.println(horas + ":" + minutos + ":" + segundos);
                             setText(horas + ":" + minutos + ":" + segundos);
                         }
@@ -52,9 +53,10 @@ public class Reloj extends Label {
                                 if(listaTareas.get(i).getFecha().equals(fecha) &&
                                 listaTareas.get(i).getHoras()==horas && listaTareas.get(i).getMinutos()==minutos &&
                                 listaTareas.get(i).getSegundos()==segundos){
-                                    for (int j=0; j<listaAcciones.size(); j++){
+                                   /* for (int j=0; j<listaAcciones.size(); j++){
                                         listaAcciones.get(j).ejecuta(listaTareas.get(i));
-                                    }
+                                    }*/
+                                   accion.ejecuta(listaTareas.get(i));
                                 }
                             }
                         }
@@ -74,11 +76,7 @@ public class Reloj extends Label {
     }
 
     public void añadirAccion(Accion accion){
-        listaAcciones.add(accion);
-    }
-
-    public void borrarAccion(Accion accion){
-        listaAcciones.remove(accion);
+        this.accion = accion;
     }
 
     public boolean isFormatoHs() {

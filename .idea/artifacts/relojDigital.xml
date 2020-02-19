@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="relojDigital">
+    <output-path>$PROJECT_DIR$/out/artifacts/relojDigital</output-path>
+    <root id="archive" name="relojDigital.jar">
+      <element id="module-output" name="Reloj" />
+    </root>
+  </artifact>
+</component>

@@ -19,9 +19,8 @@ public class Principal extends Application {
         Reloj reloj = new Reloj();
         Date date = new Date();
         reloj.comenzar();
-        reloj.setFont(new Font(25));
         reloj.setFormatoHs(true);
-        Tarea tarea = new Tarea(22, 27, 0, date, "probando");
+        Tarea tarea = new Tarea(18, 45, 0, date, "probando");
         reloj.registrarTarea(tarea);
         reloj.añadirAccion(new Accion() {
             @Override
