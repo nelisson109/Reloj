@@ -32,7 +32,7 @@ public class Reloj extends Label {
                     @Override
                     public void run() {
                         DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");//falta pasar el formato
-                        Calendar calendar = Calendar.getInstance();
+                        Calendar calendar = new GregorianCalendar();
                         horas = calendar.get(Calendar.HOUR_OF_DAY);
                         minutos = calendar.get(Calendar.MINUTE);
                         segundos = calendar.get(Calendar.SECOND);
@@ -63,7 +63,7 @@ public class Reloj extends Label {
                     }
                 });
             }
-        }, 1000, 1000);
+        }, 0, 1000);
     }
 
     public void registrarTarea(Tarea tarea){

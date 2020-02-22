@@ -1,5 +1,6 @@
 package martin;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Tarea {
@@ -8,6 +9,7 @@ public class Tarea {
     private int segundos;
     private Date fecha;
     private String texto;
+    private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
     public Tarea(int horas, int minutos, int segundos, Date fecha, String texto) {
         this.horas = horas;
@@ -41,8 +43,8 @@ public class Tarea {
         this.segundos = segundos;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getFecha() {
+        return formato.format(fecha);
     }
 
     public void setFecha(Date fecha) {
