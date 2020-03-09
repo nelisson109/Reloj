@@ -20,7 +20,7 @@ public class Principal extends Application {
         Date date = new Date();
         reloj.comenzar();
         reloj.setFormatoHs(true);
-        Tarea tarea = new Tarea(21, 03, 40, date, "probando");
+        Tarea tarea = new Tarea(17, 03, 05, date, "probando");
         reloj.registrarTarea(tarea);
         reloj.añadirAccion(new Accion() {
             @Override

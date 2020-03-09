@@ -15,7 +15,7 @@ public class Reloj extends Label {
     private int segundos;
     //private boolean formatoHoras = true;
     private BooleanProperty formatoHs = new SimpleBooleanProperty(true);
-    ArrayList<Tarea> listaTareas = new ArrayList<Tarea>();
+    List<Tarea> listaTareas = Collections.synchronizedList(new ArrayList<Tarea>());
     //ArrayList<Accion> listaAcciones = new ArrayList<Accion>();
     private Accion accion;
 
